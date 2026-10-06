@@ -1,4 +1,4 @@
-# Sistema Médico (beta)
+# Praxis (beta)
 
 Panel de gestión para consultorio médico: pacientes, agenda, cirugías, honorarios, aseguradoras, brokers, proveedores,
 metas de ahorro y tareas.

@@ -1,11 +1,11 @@
 {
-  "name": "Sistema Médico",
-  "short_name": "Sistema Médico",
+  "name": "Praxis — Gestión de consultorio",
+  "short_name": "Praxis",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#185FA5",
+  "theme_color": "#0F6E56",
   "lang": "es",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },

@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Sistema Médico</title>
+<title>Praxis</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#185FA5">
+<meta name="theme-color" content="#0F6E56">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Sistema Médico">
+<meta name="apple-mobile-web-app-title" content="Praxis">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -189,8 +189,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 <!-- ACCESO -->
 <div id="auth">
   <div class="auth-box">
-    <div class="auth-logo">SM</div>
-    <div class="auth-tit">Sistema Médico</div>
+    <div style="display:flex;justify-content:center;margin-bottom:12px"><svg viewBox="0 0 88 88" width="52" height="52" role="img" aria-label="Praxis"><rect width="88" height="88" rx="20" fill="#0F6E56"/><rect x="36" y="18" width="16" height="52" rx="8" fill="#fff"/><rect x="18" y="36" width="52" height="16" rx="8" fill="#fff"/><path d="M26 44h10l4-7 6 14 4-7h12" fill="none" stroke="#0F6E56" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="auth-tit">Praxis</div>
     <div class="auth-v on" id="av-cargando"><div class="auth-sub">Verificando acceso…</div></div>
     <div class="auth-v" id="av-login">
       <div class="auth-sub">Inicie sesión para continuar</div>
@@ -226,7 +226,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 <!-- SPLASH -->
 <div id="splash">
   <div class="s-av perfil-ini">SM</div>
-  <div class="s-l1">SISTEMA MÉDICO</div>
+  <div class="s-l1">PRAXIS</div>
   <div class="s-l2">Bienvenido de nuevo,<br><span class="perfil-nom"></span></div>
   <div class="s-l3">¿Qué haremos hoy?</div>
   <div class="s-div"></div>
@@ -875,7 +875,7 @@ function cargarConfig(){
 function exportarDatos(){
   const data={pacientes:DB.get('pacientes'),citas:DB.get('citas'),cirugias:DB.get('cirugias'),movimientos:DB.get('movimientos'),brokers:DB.get('brokers'),proveedores:DB.get('proveedores'),metas:DB.get('metas'),tareas:DB.get('tareas'),config:DB.getObj('config')};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sistema_medico_datos_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='praxis_respaldo_'+new Date().toISOString().slice(0,10)+'.json';a.click();
 }
 function importarDatos(e){
   const file=e.target.files[0];if(!file)return;
