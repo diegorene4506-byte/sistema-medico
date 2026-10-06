@@ -1,6 +1,6 @@
 // Permite abrir la app sin internet. Primero intenta la red (para recibir
 // actualizaciones) y si no hay conexión usa la copia guardada.
-const CACHE = 'sistema-medico-v2';
+const CACHE = 'sistema-medico-v3';
 const ARCHIVOS = ['./', './index.html', './config.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {

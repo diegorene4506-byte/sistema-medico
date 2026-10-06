@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Sistema Médico</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -159,7 +159,29 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .meta-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .meta-num{background:var(--bg2);border-radius:var(--radius);padding:8px 10px;text-align:center}
 .meta-num-l{font-size:10px;color:var(--text3);margin-bottom:2px}.meta-num-v{font-size:13px;font-weight:500}
-@media(max-width:640px){#sidebar{display:none}#app{flex-direction:column}.g2,.g3{grid-template-columns:1fr}.mg{grid-template-columns:1fr 1fr}}
+#menu-btn{display:none;width:34px;height:34px;margin-left:-6px;border:none;background:none;border-radius:var(--radius);align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex-shrink:0}
+#menu-btn:active{background:var(--bg2)}
+#menu-btn svg{width:20px;height:20px}
+#backdrop{display:none}
+/* CELULAR: el menú lateral se vuelve un panel que se abre con el botón ☰ */
+@media(max-width:640px){
+  #app{height:100dvh;min-height:0}
+  #sidebar{position:fixed;top:0;left:0;bottom:0;width:min(280px,82vw);z-index:900;transform:translateX(-100%);transition:transform .25s ease;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+  #app.menu-abierto #sidebar{transform:none;box-shadow:0 0 24px rgba(0,0,0,.18)}
+  #backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:899;opacity:0;pointer-events:none;transition:opacity .25s}
+  #app.menu-abierto #backdrop{opacity:1;pointer-events:auto}
+  #menu-btn{display:flex}
+  .nb{padding:11px 16px;font-size:14px}.nb svg{width:16px;height:16px}
+  #topbar{height:calc(52px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 12px 0}
+  #pg-title{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #content{padding:12px 12px calc(12px + env(safe-area-inset-bottom))}
+  input,select,textarea{font-size:16px} /* evita el zoom automático del iPhone */
+  .g2,.g3{grid-template-columns:1fr}.mg{grid-template-columns:1fr 1fr}
+  .card:has(> table){overflow-x:auto!important}.card > table{min-width:560px}
+  .bk-stats,.meta-nums{grid-template-columns:repeat(2,1fr)}
+  .egr-row{grid-template-columns:1fr 100px 36px}
+  .tabs{overflow-x:auto}.tab{white-space:nowrap}
+}
 </style>
 </head>
 <body>
@@ -227,6 +249,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
 <!-- APP -->
 <div id="app">
+  <div id="backdrop" onclick="toggleMenu(false)"></div>
   <div id="sidebar">
     <div class="logo-area">
       <div class="logo-av perfil-ini">SM</div>
@@ -255,6 +278,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 
   <div id="main">
     <div id="topbar">
+      <button id="menu-btn" onclick="toggleMenu()" aria-label="Abrir menú"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
       <span id="pg-title">Inicio</span>
       <button class="tbb p" id="main-btn">+ Nuevo paciente</button>
     </div>
@@ -534,7 +558,10 @@ const BL={inicio:'Dashboard',pacientes:'+ Nuevo paciente',agenda:'+ Agendar cita
 function enterApp(){const s=document.getElementById('splash');s.classList.add('out');setTimeout(()=>s.style.display='none',400);document.getElementById('app').classList.add('vis')}
 function gof(pg,t){enterApp();setTimeout(()=>showPg(pg,t),80)}
 function navTo(pg,t){showPg(pg,t)}
+function toggleMenu(abrir){document.getElementById('app').classList.toggle('menu-abierto',abrir)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleMenu(false)});
 function showPg(pg,t){
+  toggleMenu(false);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('page-'+pg).classList.add('on');
@@ -543,6 +570,7 @@ function showPg(pg,t){
   document.querySelectorAll('.nb').forEach(b=>{if((b.getAttribute('onclick')||'').includes("'"+pg+"'"))b.classList.add('on')});
 }
 function ir(btn,pg,t){
+  toggleMenu(false);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('page-'+pg).classList.add('on');
