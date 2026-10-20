@@ -288,6 +288,49 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .confeti{position:fixed;top:-10px;width:8px;height:14px;z-index:3000;pointer-events:none;animation:caer linear forwards}
 @keyframes caer{to{transform:translateY(105vh) rotate(720deg)}}
 
+/* TAREAS: detalle con subtareas */
+.modal{position:fixed;inset:0;z-index:1500;background:rgba(1,20,19,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.modal-box{width:100%;max-width:580px;max-height:90vh;overflow-y:auto;background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-lg);animation:pgIn .25s ease}
+.modal-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.modal-head .tcb{width:24px;height:24px;cursor:pointer}
+.tm-titulo{font-size:20px;font-weight:500;letter-spacing:-.03em;border:1px solid transparent;background:transparent;padding:6px 8px;flex:1;min-width:0}
+.tm-titulo:hover{border-color:var(--border)}
+.tm-titulo.ok{text-decoration:line-through;color:var(--text3)}
+.modal-x{width:36px;height:36px;border-radius:var(--radius);border:1px solid var(--border2);background:transparent;color:var(--text);font-size:20px;line-height:1;cursor:pointer;flex-shrink:0}
+.modal-x:hover{background:var(--bg3)}
+.sub-prog{display:flex;align-items:center;gap:12px;margin:2px 0 8px}
+.sub-prog .sec-l{margin:0}
+.sub-bar{flex:1;height:6px;border-radius:3px;background:var(--bg3);overflow:hidden}
+.sub-bar>div{height:100%;width:0;background:var(--fill-grad);border-radius:3px;transition:width .3s}
+.sub-cont{font-size:12.5px;color:var(--text2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sub{display:flex;align-items:center;gap:8px;padding:2px 6px;border-radius:var(--radius)}
+.sub:hover{background:var(--row-hover)}
+.sub .tcb{width:19px;height:19px;cursor:pointer}
+.sub input{border:1px solid transparent;background:transparent;padding:8px 6px;flex:1;width:auto;min-width:0}
+.sub input:focus{box-shadow:none;border-color:var(--border2);background:var(--input-bg)}
+.sub.ok input{text-decoration:line-through;color:var(--text3)}
+.sub-del{border:none;background:none;color:var(--text3);font-size:18px;cursor:pointer;width:30px;height:30px;border-radius:6px;flex-shrink:0}
+.sub-del:hover{color:var(--red);background:var(--red-bg)}
+.sub-vacio{font-size:13px;color:var(--text3);padding:10px 6px}
+.sub-add{display:flex;gap:8px;margin:10px 0 18px}
+.sub-add input{flex:1;width:auto;min-width:0}
+.sub-listo{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:var(--radius);background:var(--green-bg);color:var(--green-text);font-size:13px;font-weight:500;margin:4px 0 16px}
+.sub-listo .btn{padding:7px 12px;font-size:12.5px;white-space:nowrap}
+.modal-foot{display:flex;justify-content:space-between;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.ti-main{flex:1;min-width:0}
+.ti-pac{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:999px;background:var(--brand-bg);color:var(--brand-text);font-weight:500;cursor:pointer}
+.ti-pac::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brand)}
+.ti-pac:hover{background:var(--brand);color:var(--on-brand)}
+@media(min-width:641px){.tareas-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}}
+.ti:hover .tt:not(.ok){color:var(--brand)}
+.ti-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--text3);margin-top:3px}
+.ti-prog{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.ti-prog i{display:block;width:38px;height:4px;border-radius:2px;background:var(--bg3);overflow:hidden}
+.ti-prog i b{display:block;height:100%;background:var(--brand)}
+.ti-x{border:none;background:none;color:var(--text3);font-size:17px;cursor:pointer;width:30px;height:30px;border-radius:6px;flex-shrink:0}
+.ti-x:hover{color:var(--red);background:var(--red-bg)}
+
 #menu-btn{display:none;width:38px;height:38px;margin-left:-8px;border:none;background:none;border-radius:var(--radius);align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex-shrink:0}
 #menu-btn:active{background:var(--bg3)}
 #menu-btn svg{width:22px;height:22px}
@@ -324,6 +367,11 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   .cd{min-height:48px;padding:3px}.cev{font-size:9px;padding:1px 3px}
   .meta-acc input{width:100%;flex:1 1 100%}
   .qc::after{display:none}
+  .modal{align-items:flex-end;padding:0}
+  .modal-box{max-width:none;border-radius:20px 20px 0 0;max-height:92vh;padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+  .modal-foot{flex-direction:column-reverse}.modal-foot .btn{width:100%}
+  .modal .g3{grid-template-columns:1fr 1fr;gap:10px}.modal .g3 .fg:first-child{grid-column:1/-1}
+  .modal .fg{margin-bottom:10px}
 }
 </style>
 </head>
@@ -643,12 +691,12 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
       <!-- TAREAS -->
       <div id="page-tareas" class="page">
-        <div class="g2">
+        <div class="g2 tareas-grid">
           <div class="card"><div class="ct">Lista de tareas</div><div id="lista-tareas"><div style="font-size:12px;color:var(--text3);text-align:center;padding:20px">Sin tareas</div></div></div>
           <div class="card"><div class="ct">Nueva tarea</div>
             <div class="fg"><label>Tarea *</label><input id="tar-txt" placeholder="Descripción"></div>
             <div class="g2"><div class="fg"><label>Fecha límite</label><input id="tar-fecha" type="date"></div><div class="fg"><label>Prioridad</label><select id="tar-prior"><option>Normal</option><option>Alta</option><option>Urgente</option></select></div></div>
-            <div class="fg"><label>Categoría</label><select id="tar-cat"><option>Clínica</option><option>Administrativa</option><option>Financiera</option><option>Personal</option></select></div>
+            <div class="g2"><div class="fg"><label>Categoría</label><select id="tar-cat"><option>Clínica</option><option>Administrativa</option><option>Financiera</option><option>Personal</option></select></div><div class="fg"><label>Paciente (opcional)</label><select id="tar-pac"><option value="">Sin paciente</option></select></div></div>
             <button class="btn bp" style="width:100%;margin-top:4px" onclick="addTarea()">Agregar tarea</button>
           </div>
         </div>
@@ -692,6 +740,35 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   </div>
 </div>
 
+<!-- DETALLE DE TAREA -->
+<div id="tarea-modal" class="modal" onclick="if(event.target===this)cerrarTarea()">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Detalle de la tarea">
+    <div class="modal-head">
+      <div class="tcb" id="tm-check" onclick="toggleTareaModal()" title="Marcar como completada"></div>
+      <input id="tm-txt" class="tm-titulo" aria-label="Nombre de la tarea" onchange="guardarCampoTarea('txt',this.value.trim()||'Sin título')">
+      <button class="modal-x" onclick="cerrarTarea()" aria-label="Cerrar">×</button>
+    </div>
+    <div class="g3">
+      <div class="fg"><label>Fecha límite</label><input id="tm-fecha" type="date" onchange="guardarCampoTarea('fecha',this.value)"></div>
+      <div class="fg"><label>Prioridad</label><select id="tm-prior" onchange="guardarCampoTarea('prior',this.value)"><option>Normal</option><option>Alta</option><option>Urgente</option></select></div>
+      <div class="fg"><label>Categoría</label><select id="tm-cat" onchange="guardarCampoTarea('cat',this.value)"><option>Clínica</option><option>Administrativa</option><option>Financiera</option><option>Personal</option></select></div>
+    </div>
+    <div class="fg tm-pac-row"><label>Paciente</label><div style="display:flex;gap:8px"><select id="tm-pac" onchange="guardarCampoTarea('pacId',this.value);renderTareaModal()"><option value="">Sin paciente</option></select><button class="btn bo" id="tm-ver-pac" style="white-space:nowrap" onclick="irPaciente(document.getElementById('tm-pac').value)">Ver expediente</button></div></div>
+    <div class="sub-prog"><div class="sec-l">Subtareas</div><div class="sub-bar"><div id="tm-bar"></div></div><span class="sub-cont" id="tm-cont">0 de 0</span></div>
+    <div id="tm-listo"></div>
+    <div id="tm-subs"></div>
+    <div class="sub-add">
+      <input id="tm-nueva" placeholder="Ej. Revisar radiografías" onkeydown="if(event.key==='Enter')addSub()">
+      <button class="btn bp" onclick="addSub()">Agregar</button>
+    </div>
+    <div class="fg" style="margin:0"><label>Notas</label><textarea id="tm-notas" rows="3" placeholder="Detalles, teléfonos, indicaciones…" oninput="guardarNotasTarea(this.value)"></textarea></div>
+    <div class="modal-foot">
+      <button class="btn bd" onclick="eliminarTareaModal()">Eliminar tarea</button>
+      <button class="btn bo" onclick="cerrarTarea()">Listo</button>
+    </div>
+  </div>
+</div>
+
 <div id="toasts" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -728,7 +805,7 @@ function enterApp(){const s=document.getElementById('splash');s.classList.add('o
 function gof(pg,t){enterApp();setTimeout(()=>showPg(pg,t),80)}
 function navTo(pg,t){showPg(pg,t)}
 function toggleMenu(abrir){document.getElementById('app').classList.toggle('menu-abierto',abrir)}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleMenu(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(TID)cerrarTarea();toggleMenu(false)}});
 function showPg(pg,t){
   toggleMenu(false);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
@@ -808,18 +885,22 @@ function verExpediente(id){
           <div style="margin-top:10px"><label>Agregar nota</label><div style="display:flex;gap:8px;margin-top:4px"><input id="nota-inp" placeholder="Nota clínica..."><button class="btn bp" style="white-space:nowrap" onclick="addNota('${p.id}')">Agregar</button></div></div>
         </div>
         <div class="card"><div class="ct">Evolución</div>${(p.notas||[]).length?(p.notas.slice().reverse().map(n=>`<div class="tl"><div class="tl-t">${esc(n.fecha)}</div><div class="tl-d" style="background:var(--blue)"></div><div><div class="tl-ti">${esc(n.texto)}</div></div></div>`).join('')):'<div style="font-size:12px;color:var(--text3)">Sin notas</div>'}</div>
+        <div class="card"><div class="ct">Tareas<span class="ct-act" onclick="nuevaTareaPaciente('${p.id}')">+ Nueva tarea</span></div><div id="exp-tareas" data-pac="${p.id}"></div></div>
       </div>
       <div class="card"><div class="ct">Datos de contacto</div>
         <div style="font-size:12px;line-height:2;color:var(--text2)"><b style="color:var(--text);font-weight:500">Teléfono:</b> ${esc(p.tel||'—')}<br><b style="color:var(--text);font-weight:500">Correo:</b> ${esc(p.mail||'—')}<br><b style="color:var(--text);font-weight:500">Aseguradora:</b> ${esc(p.seg)}<br><b style="color:var(--text);font-weight:500">Póliza/NSS:</b> ${esc(p.pol||'—')}<br><b style="color:var(--text);font-weight:500">Registrado:</b> ${esc(p.fecha)}</div>
         <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:12px"><button class="btn bd" style="font-size:11px" onclick="eliminarPaciente('${p.id}')">Eliminar paciente</button></div>
       </div>
     </div>`;
+  renderTareasPaciente();
   st(document.querySelectorAll('#page-pacientes .tab')[2],'spe');
 }
 function cambiarEstPac(id,est){const pacs=DB.get('pacientes');const i=pacs.findIndex(x=>x.id===id);if(i>=0){pacs[i].est=est;DB.set('pacientes',pacs)}}
 function addNota(id){const inp=document.getElementById('nota-inp'),txt=inp.value.trim();if(!txt)return;const pacs=DB.get('pacientes');const i=pacs.findIndex(x=>x.id===id);if(i>=0){pacs[i].notas=pacs[i].notas||[];pacs[i].notas.push({texto:txt,fecha:new Date().toLocaleDateString('es-MX')});DB.set('pacientes',pacs);inp.value='';verExpediente(id)}}
-function eliminarPaciente(id){if(!confirm('¿Eliminar este paciente?'))return;DB.set('pacientes',DB.get('pacientes').filter(x=>x.id!==id));renderPacientes();actualizarSelects();actualizarKPIs();document.getElementById('exp-content').innerHTML='<div style="font-size:12px;color:var(--text3);text-align:center;padding:32px">Paciente eliminado</div>'}
-function actualizarSelects(){const opts='<option value="">Seleccionar...</option>'+DB.get('pacientes').map(p=>`<option value="${p.id}">${esc(p.nom)} ${esc(p.ap1)}</option>`).join('');['cita-pac','cir-pac'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts})}
+function eliminarPaciente(id){if(!confirm('¿Eliminar este paciente?'))return;DB.set('pacientes',DB.get('pacientes').filter(x=>x.id!==id));DB.set('tareas',DB.get('tareas').map(t=>t.pacId===id?{...t,pacId:''}:t));renderTareas();renderPacientes();actualizarSelects();actualizarKPIs();document.getElementById('exp-content').innerHTML='<div style="font-size:12px;color:var(--text3);text-align:center;padding:32px">Paciente eliminado</div>'}
+function actualizarSelects(){const opts='<option value="">Seleccionar...</option>'+DB.get('pacientes').map(p=>`<option value="${p.id}">${esc(p.nom)} ${esc(p.ap1)}</option>`).join('');['cita-pac','cir-pac'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts});
+  const optsT='<option value="">Sin paciente</option>'+opts.replace('<option value="">Seleccionar...</option>','');
+  ['tar-pac','tm-pac'].forEach(id=>{const el=document.getElementById(id);if(el){const v=el.value;el.innerHTML=optsT;el.value=v}})}
 
 // ── AGENDA ──
 let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
@@ -1094,30 +1175,123 @@ function confeti(n=110){
 function delMeta(id){if(!confirm('¿Eliminar esta meta?'))return;DB.set('metas',DB.get('metas').filter(m=>m.id!==id));renderMetas()}
 
 // ── TAREAS ──
+// Cada tarea puede tener subtareas (lista de pendientes) y notas.
+// Formato: {id,txt,fecha,prior,cat,pacId,done,subs:[{id,txt,done}],notas}
+let TID=null; // tarea abierta en el detalle
+const PRIOR_COL={'Urgente':'var(--red)','Alta':'var(--amber)','Normal':'var(--text3)'};
+
 function addTarea(){
-  const txt=document.getElementById('tar-txt').value.trim();if(!txt)return;
-  const tareas=DB.get('tareas');
-  tareas.push({id:uid(),txt,fecha:document.getElementById('tar-fecha').value,prior:document.getElementById('tar-prior').value,cat:document.getElementById('tar-cat').value,done:false});
-  DB.set('tareas',tareas);document.getElementById('tar-txt').value='';document.getElementById('tar-fecha').value='';
+  const txt=document.getElementById('tar-txt').value.trim();
+  if(!txt){toast('Escriba la tarea','err');document.getElementById('tar-txt').focus();return}
+  const tareas=DB.get('tareas'),id=uid();
+  tareas.push({id,txt,fecha:document.getElementById('tar-fecha').value,prior:document.getElementById('tar-prior').value,cat:document.getElementById('tar-cat').value,pacId:document.getElementById('tar-pac').value,done:false,subs:[],notas:''});
+  DB.set('tareas',tareas);['tar-txt','tar-fecha','tar-pac'].forEach(x=>document.getElementById(x).value='');
   renderTareas();actualizarKPIs();
+  abrirTarea(id);setTimeout(()=>document.getElementById('tm-nueva').focus(),60);
+  toast('Tarea creada: agregue sus subtareas');
 }
-function toggleTarea(id){const tareas=DB.get('tareas');const i=tareas.findIndex(t=>t.id===id);if(i>=0){tareas[i].done=!tareas[i].done;DB.set('tareas',tareas);renderTareas();actualizarKPIs()}}
-function eliminarTarea(id){DB.set('tareas',DB.get('tareas').filter(t=>t.id!==id));renderTareas();actualizarKPIs()}
+function toggleTarea(id){const tareas=DB.get('tareas');const i=tareas.findIndex(t=>t.id===id);if(i>=0){tareas[i].done=!tareas[i].done;DB.set('tareas',tareas);renderTareas();actualizarKPIs();if(TID===id)renderTareaModal()}}
+function eliminarTarea(id){
+  const t=DB.get('tareas').find(x=>x.id===id);if(!t)return;
+  if(!confirm('¿Eliminar la tarea "'+t.txt+'"'+((t.subs||[]).length?' y sus subtareas':'')+'?'))return;
+  DB.set('tareas',DB.get('tareas').filter(x=>x.id!==id));renderTareas();actualizarKPIs();
+}
+
+// Avance de subtareas: [hechas, total]
+const avance=t=>{const s=t.subs||[];return[s.filter(x=>x.done).length,s.length]};
+function progresoHTML(t){
+  const[h,n]=avance(t);if(!n)return'';
+  return`<span class="ti-prog" title="${h} de ${n} subtareas"><i><b style="width:${Math.round(h/n*100)}%"></b></i>${h}/${n}</span>`;
+}
+function filaTarea(t,conBorrar,sinPaciente){
+  const pac=!sinPaciente&&t.pacId&&DB.get('pacientes').find(p=>p.id===t.pacId);
+  return`<div class="ti" onclick="abrirTarea('${t.id}')">
+    <div class="tcb ${t.done?'ok':''}" onclick="event.stopPropagation();toggleTarea('${t.id}')" title="Marcar como completada"></div>
+    <div class="ti-main"><div class="tt ${t.done?'ok':''}">${esc(t.txt)}</div>
+      <div class="ti-meta">${pac?`<span class="ti-pac" onclick="event.stopPropagation();irPaciente('${pac.id}')" title="Ver expediente">${esc(pac.nom+' '+pac.ap1)}</span>`:''}${progresoHTML(t)}${t.fecha?`<span>${esc(t.fecha)}</span>`:''}${t.cat?`<span>${esc(t.cat)}</span>`:''}${t.notas?'<span title="Tiene notas">✎ notas</span>':''}</div></div>
+    <span style="font-size:11.5px;font-weight:500;color:${PRIOR_COL[t.prior]||'var(--text3)'}">${esc(t.prior)}</span>
+    ${conBorrar?`<button class="ti-x" onclick="event.stopPropagation();eliminarTarea('${t.id}')" aria-label="Eliminar tarea">×</button>`:''}
+  </div>`;
+}
 function renderTareas(){
   const tareas=DB.get('tareas');const el=document.getElementById('lista-tareas');
-  if(!tareas.length){el.innerHTML='<div style="font-size:12px;color:var(--text3);text-align:center;padding:20px">Sin tareas</div>';return}
-  const pc={'Urgente':'var(--red)','Alta':'var(--amber)','Normal':'var(--text3)'};
-  el.innerHTML=tareas.map(t=>`<div class="ti">
-    <div class="tcb ${t.done?'ok':''}" onclick="toggleTarea('${t.id}')"></div>
-    <div style="flex:1"><div class="tt ${t.done?'ok':''}">${esc(t.txt)}</div>${t.fecha?`<div style="font-size:10px;color:var(--text3)">${esc(t.fecha)} · ${esc(t.cat)}</div>`:''}</div>
-    <span style="font-size:10px;font-weight:500;color:${pc[t.prior]||'var(--text3)'}">${esc(t.prior)}</span>
-    <button class="btn bd" style="font-size:10px;padding:2px 6px;margin-left:6px" onclick="eliminarTarea('${t.id}')">×</button>
-  </div>`).join('');
+  // Pendientes primero; las completadas al final
+  const orden=[...tareas.filter(t=>!t.done),...tareas.filter(t=>t.done)];
+  el.innerHTML=orden.length?orden.map(t=>filaTarea(t,true)).join(''):'<div class="empty">Sin tareas. Cree una y toque para agregarle subtareas.</div>';
   const pendientes=tareas.filter(t=>!t.done).slice(0,5);
-  const elI=document.getElementById('tareas-inicio-list');
-  elI.innerHTML=pendientes.length?pendientes.map(t=>`<div class="ti"><div class="tcb ${t.done?'ok':''}" onclick="toggleTarea('${t.id}')"></div><div class="tt ${t.done?'ok':''}">${esc(t.txt)}</div><div class="td2">${esc(t.fecha||'')}</div></div>`).join(''):'<div style="font-size:12px;color:var(--text3);text-align:center;padding:12px">Sin tareas pendientes</div>';
+  document.getElementById('tareas-inicio-list').innerHTML=pendientes.length?pendientes.map(t=>filaTarea(t,false)).join(''):'<div class="empty">Sin tareas pendientes</div>';
   document.getElementById('badge-tareas').textContent=tareas.filter(t=>!t.done).length;
+  renderTareasPaciente();
 }
+
+// ── Detalle de la tarea ──
+function abrirTarea(id){TID=id;renderTareaModal(true);document.getElementById('tarea-modal').classList.add('on')}
+function cerrarTarea(){TID=null;document.getElementById('tarea-modal').classList.remove('on')}
+// Aplica un cambio a la tarea abierta y guarda
+function modTarea(fn,{redibujar=true}={}){
+  const tareas=DB.get('tareas'),t=tareas.find(x=>x.id===TID);if(!t)return;
+  t.subs=t.subs||[];fn(t);DB.set('tareas',tareas);
+  renderTareas();actualizarKPIs();if(redibujar)renderTareaModal();
+}
+function renderTareaModal(llenarCampos){
+  const t=DB.get('tareas').find(x=>x.id===TID);if(!t){cerrarTarea();return}
+  const subs=t.subs||[],[h,n]=avance(t);
+  document.getElementById('tm-check').className='tcb'+(t.done?' ok':'');
+  const tit=document.getElementById('tm-txt');tit.className='tm-titulo'+(t.done?' ok':'');
+  if(llenarCampos){
+    tit.value=t.txt;
+    document.getElementById('tm-fecha').value=t.fecha||'';
+    document.getElementById('tm-prior').value=t.prior||'Normal';
+    document.getElementById('tm-cat').value=t.cat||'Clínica';
+    document.getElementById('tm-notas').value=t.notas||'';
+    document.getElementById('tm-pac').value=t.pacId||'';
+    document.getElementById('tm-nueva').value='';
+  }
+  document.getElementById('tm-ver-pac').style.display=t.pacId?'':'none';
+  document.getElementById('tm-bar').style.width=(n?h/n*100:0)+'%';
+  document.getElementById('tm-cont').textContent=h+' de '+n;
+  document.getElementById('tm-listo').innerHTML=(n&&h===n&&!t.done)?'<div class="sub-listo">Todas las subtareas están listas<button class="btn bp" onclick="toggleTareaModal()">Completar tarea</button></div>':'';
+  document.getElementById('tm-subs').innerHTML=n?subs.map(x=>`<div class="sub ${x.done?'ok':''}">
+      <div class="tcb ${x.done?'ok':''}" onclick="toggleSub('${x.id}')" role="checkbox" aria-checked="${x.done}"></div>
+      <input value="${esc(x.txt)}" aria-label="Subtarea" onchange="editSub('${x.id}',this.value)" onkeydown="if(event.key==='Enter')this.blur()">
+      <button class="sub-del" onclick="delSub('${x.id}')" aria-label="Eliminar subtarea">×</button>
+    </div>`).join(''):'<div class="sub-vacio">Aún no hay subtareas. Agregue la primera abajo.</div>';
+}
+function guardarCampoTarea(campo,valor){modTarea(t=>{t[campo]=valor},{redibujar:false})}
+let _notasT;
+function guardarNotasTarea(v){clearTimeout(_notasT);_notasT=setTimeout(()=>modTarea(t=>{t.notas=v},{redibujar:false}),300)}
+function toggleTareaModal(){modTarea(t=>{t.done=!t.done});const t=DB.get('tareas').find(x=>x.id===TID);if(t&&t.done)toast('Tarea completada')}
+function addSub(){
+  const inp=document.getElementById('tm-nueva'),txt=inp.value.trim();
+  if(!txt){inp.focus();return}
+  modTarea(t=>{t.subs.push({id:uid(),txt,done:false});t.done=false});
+  inp.value='';inp.focus();
+}
+function toggleSub(sid){modTarea(t=>{const x=t.subs.find(y=>y.id===sid);if(x)x.done=!x.done})}
+function editSub(sid,v){
+  v=v.trim();if(!v){delSub(sid);return}
+  modTarea(t=>{const x=t.subs.find(y=>y.id===sid);if(x)x.txt=v},{redibujar:false});
+}
+function delSub(sid){modTarea(t=>{t.subs=t.subs.filter(y=>y.id!==sid)})}
+// Tareas del paciente abierto en el expediente
+function renderTareasPaciente(){
+  const el=document.getElementById('exp-tareas');if(!el)return;
+  const pid=el.dataset.pac,ts=DB.get('tareas').filter(t=>t.pacId===pid);
+  const orden=[...ts.filter(t=>!t.done),...ts.filter(t=>t.done)];
+  el.innerHTML=orden.length?orden.map(t=>filaTarea(t,false,true)).join(''):'<div style="font-size:13px;color:var(--text3)">Sin tareas para este paciente</div>';
+}
+function nuevaTareaPaciente(pid){
+  const p=DB.get('pacientes').find(x=>x.id===pid);if(!p)return;
+  const tareas=DB.get('tareas'),id=uid();
+  tareas.push({id,txt:'Seguimiento — '+p.nom+' '+p.ap1,fecha:'',prior:'Normal',cat:'Clínica',pacId:pid,done:false,subs:[],notas:''});
+  DB.set('tareas',tareas);renderTareas();actualizarKPIs();
+  abrirTarea(id);setTimeout(()=>{const t=document.getElementById('tm-txt');t.focus();t.select()},60);
+}
+function irPaciente(pid){
+  if(!pid||!DB.get('pacientes').find(p=>p.id===pid))return;
+  cerrarTarea();showPg('pacientes','Pacientes');verExpediente(pid);
+}
+function eliminarTareaModal(){const id=TID;cerrarTarea();eliminarTarea(id)}
 
 // ── KPIs ──
 function actualizarKPIs(){
